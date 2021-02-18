@@ -1,0 +1,121 @@
+syntax = "proto3";
+package model;
+
+option go_package = "./golang";
+
+message BidRequest {
+  string bidderCode = 1;
+  string state = 2;
+  float cpm = 3;
+  string size = 4;
+  uint32 elapsed = 5;
+  string bidId = 6; // for join with impression
+  repeated string tags = 7;
+  string currency = 8;
+}
+
+message Auction {
+  uint64 ingestionTime = 1;
+  string scopeId = 2;
+  string tagId = 3;
+  string adUnit = 4;
+  string device = 5;
+  string country = 6;
+  string domain = 7;
+  // deduplication an join 
+  string transactionId = 8;
+  string auctionId = 9;
+  // bid objects
+  repeated BidRequest bidRequests = 10;
+  // indicate the iteration of the refresh
+  bool refresh = 11;
+  // ex [ "refresh:3" ]
+  repeated string tags = 12;
+  // debug fields
+  string browserName = 13;
+  string browserVersion = 14;
+  string osName = 15;
+  string osVersion = 16;
+  // extended model fields
+  string href = 17;
+  repeated string sizes = 18;
+  string userConsentState = 19;
+  string userConsentVersion = 20;
+  string pbjsVersion = 21;
+  string pbstckVersion = 22;
+  string adUnitPath = 23;
+  string hasUserId = 24;
+  repeated string userIdProviderList = 25;
+  bool pubstackManaged = 26;
+  bool pubstackRefresh = 27;
+}
+
+message Impression {
+  uint64 ingestionTime = 1;
+  string scopeId = 2;
+  string tagId = 3;
+  string adUnit = 4;
+  string device = 5;
+  string country = 6;
+  string domain = 7;
+  // deduplication an join 
+  string transactionId = 8;
+  string auctionId = 9;
+  // auction results
+  float cpm = 10;
+  string size = 11;
+  string bidderCode = 12;
+  // indicate the iteration of the refresh
+  bool refresh = 13;
+  // ex [ "refresh:3" ]
+  repeated string tags = 14;
+  // for join with bids and deduplication
+  string bidId = 15;
+  // debug fields
+  string browserName = 16;
+  string browserVersion = 17;
+  string osName = 18;
+  string osVersion = 19;
+  // extended model fields
+  string href = 20;
+  string userConsentState = 21;
+  string userConsentVersion = 22;
+  string pbjsVersion = 23;
+  string pbstckVersion = 24;
+  string adUnitPath = 25;
+  string hasUserId = 26;
+  repeated string userIdProviderList = 27;
+  bool viewabilityMeasurable = 28;
+  bool pubstackManaged = 29;
+  bool pubstackRefresh = 30;
+  string currency = 31;
+}
+
+message ViewableImpression {
+  // Context
+  uint64 ingestionTime = 1;
+  string scopeId = 2;
+  string tagId = 3;
+  string country = 4;
+  string device = 5;
+  string domain = 6;
+  string browserName = 7;
+  string browserVersion = 8;
+  string osName = 9;
+  string osVersion = 10;
+  string pbstckVersion = 11;
+  // Impression inherited fields
+  string bidId = 12;
+  string auctionId = 13;
+  string adUnit = 14;
+  string adUnitPath = 15;
+  string bidderCode = 16;
+  float cpm = 17;
+  bool refresh = 18;
+  string size = 19;
+  string pbjsVersion = 20;
+  // Viewability specific fields
+  string htmlElementId = 21;
+  bool mrcViewable = 22;
+  string currency = 23;
+}
