@@ -14,7 +14,7 @@ This repository contains protobuf messages used by various components at pubstac
 
 ### golang
 
-```
+```golang
 package main
 
 import (
@@ -24,10 +24,17 @@ import (
 )
 
 func main() {
-  impression := model.Impression{}
+  impression := model.Impression{
+    Cpm: 0.42,
+  }
   ser, _ := json.Marshal(impression)
   fmt.Println(string(ser))
 }
+```
+
+### rust
+
+```
 ```
 
 ## Note
