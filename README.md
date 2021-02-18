@@ -39,4 +39,4 @@ func main() {
 
 ## Note
 
-Do not move the go.mod file from the root. This is due to go with github nmot accpeting module not declared at the root of a repository
+Do not move the go.mod file from the root. This is due to go with github not accepting module not declared elsewhere than the root of this repository
