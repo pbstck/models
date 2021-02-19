@@ -34,7 +34,24 @@ func main() {
 
 ### rust
 
+`Cargo.toml`
+
+*everythig else is ommited for clarity*
+```toml
+[dependencies]
+models = { git = "https://github.com/pbstck/models.git", branch = "master" }
+
 ```
+
+`enum.rs`
+```rust
+use models::{Auction, Impression, ViewableImpression};
+
+pub enum Event {
+    Impression(Impression),
+    Auction(Auction),
+    ViewableImpression(ViewableImpression),
+}
 ```
 
 ## Note
