@@ -1,14 +1,6 @@
 # Models
 
-This repository contains protobuf messages used by various components at pubstack oto communicate between each others.
-
-## Components:
-
-* Aggregation processing (golang)
-* Reporting consumer (golang)
-* Intake:
-  * Intake server (golang)
-  * Mithrandir (rust)
+This repository contains protobuf messages used by various components at pubstack.
 
 ## How to use
 
@@ -18,13 +10,13 @@ This repository contains protobuf messages used by various components at pubstac
 package main
 
 import (
-  model "github.com/pbstck/models/golang"
+  "github.com/pbstck/models/golang/models"
   "fmt"
   "encoding/json"
 )
 
 func main() {
-  impression := model.Impression{
+  impression := models.Impression{
     Cpm: 0.42,
   }
   ser, _ := json.Marshal(impression)
@@ -36,11 +28,10 @@ func main() {
 
 `Cargo.toml`
 
-*everythig else is ommited for clarity*
+*everything else is omitted for clarity*
 ```toml
 [dependencies]
 models = { git = "https://github.com/pbstck/models.git", branch = "master" }
-
 ```
 
 `enum.rs`
@@ -53,7 +44,3 @@ pub enum Event {
     ViewableImpression(ViewableImpression),
 }
 ```
-
-## Note
-
-Do not move the go.mod file from the root. This is due to go with github not accepting module not declared elsewhere than the root of this repository

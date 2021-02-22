@@ -1,7 +1,7 @@
 syntax = "proto3";
 package model;
 
-option go_package = "./golang";
+option go_package = "./golang/models";
 
 message BidRequest {
   string bidderCode = 1;

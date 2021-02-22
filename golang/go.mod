@@ -1,4 +1,4 @@
-module github.com/pbstck/models
+module github.com/pbstck/models/golang
 
 go 1.14
 
