@@ -1,0 +1,41 @@
+name: Golang
+on: push
+jobs:
+  ci:
+    container:
+      image: 563565546264.dkr.ecr.eu-west-1.amazonaws.com/go:1.14.2_1
+      credentials:
+        username: AWS
+        password: ${{ secrets.ECR_PASSWORD }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: generate protoc files
+        run: |
+          make go_proto
+          touch toto
+      - name: save generated for next job
+        uses: actions/upload-artifact@v2
+        with:
+          name: proto
+          path: golang/models/requests.pb.go
+  check_changes:
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download generated for next job
+        uses: actions/download-artifact@v2
+        with:
+          name: proto
+      - name: Check if there are changes
+        run: |
+          mv requests.pb.go golang/models/requests.pb.go
+          if [[ -z "$(git status --porcelain)" ]];
+          then
+            echo "No changes"
+          else
+            git status
+            echo "Changes detected, you should use make go_proto and commit the changes"
+            exit 1
+          fi
