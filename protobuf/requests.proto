@@ -119,3 +119,31 @@ message ViewableImpression {
   bool mrcViewable = 22;
   string currency = 23;
 }
+
+message MeasuredImpression {
+  // Context
+  uint64 ingestionTime = 1;
+  string scopeId = 2;
+  string tagId = 3;
+  string country = 4;
+  string device = 5;
+  string domain = 6;
+  string browserName = 7;
+  string browserVersion = 8;
+  string osName = 9;
+  string osVersion = 10;
+  string pbstckVersion = 11;
+  // Impression inherited fields
+  string bidId = 12;
+  string auctionId = 13;
+  string adUnit = 14;
+  string adUnitPath = 15;
+  string bidderCode = 16;
+  float cpm = 17;
+  bool refresh = 18;
+  string size = 19;
+  string pbjsVersion = 20;
+  // MeasuredImpression specific fields
+  uint64 viewedTime = 21;
+  string currency = 22;
+}
